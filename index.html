@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booster Jaringan Web</title>
+    <link rel="preconnect" href="https://example.com">
+    <link rel="dns-prefetch" href="https://example.com">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            overflow: hidden;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        button {
+            background: #ff6a00;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 20px;
+        }
+        button:hover {
+            background: #ff4500;
+        }
+        img {
+            width: 100%;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+
+        /* Elemen 3D */
+        .booster-3d {
+            width: 100px;
+            height: 100px;
+            margin: 20px auto;
+            transform-style: preserve-3d;
+            animation: spin 3s linear infinite;
+            display: none;
+        }
+        .cube {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            background: rgba(255, 255, 255, 0.3);
+            border: 2px solid white;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+        .front  { transform: translateZ(50px); }
+        .back   { transform: rotateY(180deg) translateZ(50px); }
+        .right  { transform: rotateY(90deg) translateZ(50px); }
+        .left   { transform: rotateY(-90deg) translateZ(50px); }
+        .top    { transform: rotateX(90deg) translateZ(50px); }
+        .bottom { transform: rotateX(-90deg) translateZ(50px); }
+
+        @keyframes spin {
+            0% { transform: rotateX(0deg) rotateY(0deg); }
+            100% { transform: rotateX(360deg) rotateY(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Booster Jaringan Web</h1>
+    <p>Tekan tombol di bawah untuk mengoptimalkan koneksi jaringan.</p>
+    
+    <div class="booster-3d" id="booster3D">
+        <div class="cube front"></div>
+        <div class="cube back"></div>
+        <div class="cube right"></div>
+        <div class="cube left"></div>
+        <div class="cube top"></div>
+        <div class="cube bottom"></div>
+    </div>
+
+    <button onclick="optimizeNetwork()">Boost Network</button>
+    <p id="status"></p>
+
+
+
+<script>
+    function optimizeNetwork() {
+        let statusText = document.getElementById("status");
+        let booster3D = document.getElementById("booster3D");
+
+        statusText.innerText = "Mengoptimalkan koneksi...";
+        booster3D.style.display = "block"; // Tampilkan animasi 3D
+
+        // 1. Preload data penting
+        fetch('https://jsonplaceholder.typicode.com/posts', { priority: 'high' })
+            .then(response => response.json())
+            .then(data => console.log("Data preloaded:", data))
+            .catch(err => console.error("Gagal preload data:", err));
+
+        // 2. Menggunakan WebRTC untuk koneksi lebih cepat
+        let peer = new RTCPeerConnection();
+        peer.createDataChannel("BoosterChannel");
+        peer.createOffer().then(offer => peer.setLocalDescription(offer));
+
+        // 3. Register Service Worker untuk caching offline
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js')
+                .then(() => console.log("Service Worker aktif!"))
+                .catch(err => console.error("Gagal daftar SW:", err));
+        }
+
+        // 4. Memprioritaskan gambar agar lebih cepat dimuat
+        let images = document.querySelectorAll("img");
+        images.forEach(img => img.setAttribute("fetchpriority", "high"));
+
+        setTimeout(() => {
+            statusText.innerText = "Jaringan dioptimalkan!";
+            booster3D.style.display = "none"; // Sembunyikan animasi setelah selesai
+        }, 3000);
+    }
+</script>
+
+</body>
+</html>
