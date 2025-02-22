@@ -1,7 +1,5 @@
 # AI-8
 # https://r00txnemesis.github.io/AI-8/
-How Far AI Change The World 
-
 
 **Web Network Booster 🚀**
 
